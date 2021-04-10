@@ -2,6 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import moment from "moment";
 import PropTypes from "prop-types";
+import Tail from "./Tail";
+import Envelope from "./Envelope";
 import "./index.css";
 
 function Tweet( {tweet} ) {
@@ -64,7 +66,6 @@ Author.propTypes = {
     }).isRequired
 };
 
-
 const Time = ({ time }) => {
     const timeString = moment(time).fromNow();
     return (
@@ -121,15 +122,6 @@ const tweetData = {
     timestamp: "2016-07-30 21:24:37"
 };
 
-function AddressLabel({ person }) {
-    return (
-        <>
-            <span>{person.name}</span> <br/>
-            <span>{person.streetAdress}</span> <br/>
-            <span>{person.cityStatePostalCode}</span> <br/>
-        </>
-    )
-}
 const personData = {
     name: "Full Name",
     streetAdress: "123 Fake St.",
@@ -141,44 +133,6 @@ const personData2 = {
     streetAdress: "456 Another St.",
     cityStatePostalCode: "New York City, NY"
 };
-
-function Envelope({ toPerson, fromPerson }) {
-    return (
-        <>
-            <AddressLabel person={toPerson}/>
-            <AddressLabel person={fromPerson}/>
-        </>
-    )
-}
-
-function FirstChildOnly({ children }) {
-    const item = React.Children.toArray(children)[0];
-    return (<div>{item}</div>);
-}
-
-function LastChildOnly({ children }) {
-    const lastElementIndex = children.length - 1;
-    const item = React.Children.toArray(children)[lastElementIndex];
-    return (<div>{item}</div>);
-}
-
-function Head({ numberOfElementsToRender, children }) {
-    const items = React.Children.toArray(children);
-    const toRender = [];
-    for (let i = 0; i < numberOfElementsToRender; i++) {
-        toRender.push(<span key={i}>{items[i]}</span>);
-    }
-    return (<div>{toRender}</div>);
-}
-
-function Tail({ numberOfElementsToRender, children }) {
-    const items = React.Children.toArray(children);
-    const toRender = [];
-    for (let i = items.length - 1; i > numberOfElementsToRender; i--) {
-        toRender.push(<span key={i}>{items[i]}</span>);
-    }
-    return (<div>{toRender}</div>);
-}
 
 ReactDOM.render(
     <>
@@ -192,6 +146,7 @@ ReactDOM.render(
             <span>6</span>
             <span>7</span>
         </Tail>
+        <Envelope fromPerson={personData} toPerson={personData2} />
     </>,
     document.getElementById("root")
 );
