@@ -1,9 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import FirstNameLastName from "./FirstNameLastName";
-import TrickInput from "./TrickInput";
+import PizzaForm from "./PizzaForm";
 
 ReactDOM.render(
-    <TrickInput />,
+    <PizzaForm />,
     document.getElementById("root")
 );
